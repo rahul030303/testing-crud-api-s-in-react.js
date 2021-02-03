@@ -26,7 +26,7 @@ class Login extends Component{
         this.authService.isUserAuthorized(this.state)
         .then(response=>{
             localStorage.setItem("token", response.data.accessToken.token);
-
+            console.log(response)
         })
         .catch(error=>{
             console.log(error);
