@@ -1,9 +1,7 @@
 import {Component} from 'react';
 import axios from 'axios';
 
-
 class IssueService extends Component{
-
 
     constructor(props){
         super(props);
@@ -29,7 +27,7 @@ class IssueService extends Component{
 
     saveData = async ()=>{
         return axios.post('http://stapi.wispa.me/api/Issues/Save',{
-            "id": 0,
+            "id": 268,
             "name": "string",
             "description": "string",
             "targetDate": "2021-02-03T10:02:54.905Z",
@@ -51,3 +49,4 @@ class IssueService extends Component{
 
 
 export default IssueService;
+

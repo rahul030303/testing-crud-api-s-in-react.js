@@ -1,9 +1,20 @@
-import React from 'react';
+import React,{Component} from 'react';
 
-function ShowIssues(props){
-    return(
-        Hello
-    )
+class ShowIssues extends Component{
+
+    constructor(props){
+        super(props);
+        this.issues = localStorage.getItem('issues');
+        console.log(this.issues)
+    }
+
+    render(){
+        return(
+            <div>
+            Hello
+            </div>
+        )
+    }
 }
 
 export default ShowIssues;

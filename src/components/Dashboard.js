@@ -1,7 +1,6 @@
 import React from 'react';
 import TemporaryDrawer from './SideNav';
 
-
 function Dashboard(){
     return(
         <React.Fragment>

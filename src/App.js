@@ -1,15 +1,29 @@
 import './App.css';
-import Dashboard from './components/Dashboard';
+import Navbar from './components/Navbar';
+import {BrowserRouter as Router, Link,  Switch, Route} from 'react-router-dom';
+import Home from './components/Home';
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import ShowIssues from './components/ShowIssues';
+import AddIssue from './components/AddIssues';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <div className="App">
-      <h1>Testing CRUD Api's in React</h1>
-      <Dashboard/>
-      <Login/>
+   
+    <Navbar/>
+    
+    <Switch>
+                <Route exact path="/" render={ props => <Home/> } />
+                <Route  path="/login" component={Login}/>
+                <ProtectedRoute  path="/dashboard" component={Dashboard} />
+                <ProtectedRoute path="/show-issues" component={ShowIssues} />
+                <ProtectedRoute path="/add-issues" component={AddIssue} />
+    </Switch>
     </div>
   );
 }
 
 export default App;
+

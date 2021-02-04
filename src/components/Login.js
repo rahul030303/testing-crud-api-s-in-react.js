@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import AuthService from '../services/AuthService';
 import axios from 'axios';
 
+
 class Login extends Component{
 
     constructor(props){
@@ -26,7 +27,9 @@ class Login extends Component{
         this.authService.isUserAuthorized(this.state)
         .then(response=>{
             localStorage.setItem("token", response.data.accessToken.token);
+
             console.log(response)
+            this.props.history.push('/dashboard');
         })
         .catch(error=>{
             console.log(error);
@@ -37,6 +40,7 @@ class Login extends Component{
         const {userName,password} = this.state ;
     return(
         <div>
+        <h2>Login To Continue</h2>
         <form onSubmit={this.handleSubmit}>
         <input type="text" name="userName" value={userName} placeholder="Enter email" onChange={ this.handleChange.bind(this)} >
         </input> <br></br>

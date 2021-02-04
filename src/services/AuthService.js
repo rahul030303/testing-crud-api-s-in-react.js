@@ -13,13 +13,10 @@ class AuthService extends Component{
 
     isUserAuthorized = async (user) =>{
         return axios.post("http://stapi.wispa.me/api/Auth/login",user);
-     }
-
-    getToken= async (token)=>{
-        this.setState({token:token})
-    }
-    
+     } 
 }
 
 
 export default AuthService;
+
+

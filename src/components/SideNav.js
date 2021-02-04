@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {withRouter} from 'react-router-dom';
 // import clsx from 'clsx';
 // import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -27,7 +27,7 @@ import IssueService from '../services/IssueService';
 
 const issueService = new IssueService()
 
-function TemporaryDrawer() {
+function TemporaryDrawer(props) {
 //   const classes = useStyles();
  
   const [state, setState] = React.useState({
@@ -57,7 +57,9 @@ function TemporaryDrawer() {
     }else if(rText === "Get All Issues"){
         issueService.getAllIssues()
         .then(response=>{
-            console.log(response);
+            // console.log(response.data);
+            localStorage.setItem('issues',response.data);
+            props.history.push('/show-issues');
         })
         .catch(error=>{
             console.log(error);
@@ -66,6 +68,7 @@ function TemporaryDrawer() {
         issueService.saveData()
         .then(response=>{
             console.log(response);
+            props.history.push('/add-issues');
         })
         .catch(error=>{
             console.log(error);
@@ -107,4 +110,4 @@ function TemporaryDrawer() {
   );
 }
 
-export default TemporaryDrawer;
+export default withRouter(TemporaryDrawer);
