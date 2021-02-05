@@ -22,7 +22,6 @@ function IssueDetail(props){
       
       <React.Fragment>
             {/*<h1>{props.match.params.id}</h1>*/}
-          
                 <form>
                 <TextField label="id" value= {issueInfo[0].id}  className={classes.root} noValidate autoComplete="off" id="outlined-basic"   variant="outlined" />   
                 <TextField label="name" value= {issueInfo[0].name} className={classes.root} noValidate autoComplete="off" id="outlined-basic1"  variant="outlined" /> <br/> <br/>   

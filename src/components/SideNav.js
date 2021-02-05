@@ -1,8 +1,9 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 // import clsx from 'clsx';
-// import { makeStyles } from '@material-ui/core/styles';
+import useStyles from './SideNavStyles';
 import Drawer from '@material-ui/core/Drawer';
+import SvgIcon from '@material-ui/core/SvgIcon';
 import WarningIcon from '@material-ui/icons/Warning';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
@@ -16,19 +17,19 @@ import IssueService from '../services/IssueService';
 // import axios from 'axios';
 
 
-// const useStyles = makeStyles({
-//   list: {
-//     width: 250,
-//   },
-//   fullList: {
-//     width: 'auto',
-//   },
-// });
 
 const issueService = new IssueService()
 
+function HomeIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </SvgIcon>
+  );
+}
+
 function TemporaryDrawer(props) {
-//   const classes = useStyles();
+  const classes = useStyles();
  
   const [state, setState] = React.useState({
     left: false
@@ -46,51 +47,45 @@ function TemporaryDrawer(props) {
 
   const handleClick= (rText)=>{
 
-    if(rText === "Get Issues"){
-        issueService.getIssues()
-        .then(response=>{
-            console.log(response);
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-    }else if(rText === "Get All Issues"){
-        issueService.getAllIssues()
-        .then(response=>{
-            console.log(response.data);
-            localStorage.setItem('issues',JSON.stringify(response.data));
-            props.history.push('/show-issues');
-        })
-        .catch(error=>{
-            console.log(error);
-        })
-    }else if(rText === 'Post New Issue'){
-        issueService.saveData()
-        .then(response=>{
-            console.log(response);
-            props.history.push('/add-issues');
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+    if(rText === "Home"){
+      props.history.push('/');
+    }else if(rText === "Dashboard"){
+        props.history.push('/dashboard');
+    }else if(rText === 'Issues'){
+      issueService.getAllIssues()
+      .then(response=>{
+          console.log(response.data);
+          localStorage.setItem('issues',JSON.stringify(response.data));
+          props.history.push('/show-issues');
+      })
+      .catch(error=>{
+          console.log(error);
+      })
+    }
+  }
+
+  const handleLogs = (logInfo) =>{
+    if(logInfo == "Log In"){
+        props.history.push('/login');
+    }else{
+      localStorage.removeItem('token');
+      props.history.push('/login');
     }
   }
 
   const list = (left) => (
     <div>
       <List>
-        {[ 'Get Issues','Get All Issues','Post New Issue', 'Send email', 'Drafts'].map((text, index) => (
+        {[ 'Home','Dashboard','Issues'].map((text, index) => (
           <ListItem onClick={()=>handleClick(text)} button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <WarningIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+        {['Log In', 'Log Out'].map((text, index) => (
+          <ListItem button onClick={()=>handleLogs(text)} key={text}>
             <ListItemText primary={text} />
           </ListItem>
         ))}
