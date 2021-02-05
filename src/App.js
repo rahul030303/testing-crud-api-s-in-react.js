@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import ShowIssues from './components/ShowIssues';
 import AddIssue from './components/AddIssues';
+import IssueDetail from './components/IssueDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <ProtectedRoute  path="/dashboard" component={Dashboard} />
                 <ProtectedRoute path="/show-issues" component={ShowIssues} />
                 <ProtectedRoute path="/add-issues" component={AddIssue} />
+                <ProtectedRoute exact path="/issue-details/:id" component={IssueDetail} />
     </Switch>
     </div>
   );

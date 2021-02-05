@@ -57,8 +57,8 @@ function TemporaryDrawer(props) {
     }else if(rText === "Get All Issues"){
         issueService.getAllIssues()
         .then(response=>{
-            // console.log(response.data);
-            localStorage.setItem('issues',response.data);
+            console.log(response.data);
+            localStorage.setItem('issues',JSON.stringify(response.data));
             props.history.push('/show-issues');
         })
         .catch(error=>{
@@ -111,3 +111,4 @@ function TemporaryDrawer(props) {
 }
 
 export default withRouter(TemporaryDrawer);
+
